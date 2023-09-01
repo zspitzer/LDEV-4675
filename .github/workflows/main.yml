@@ -50,7 +50,6 @@ jobs:
           path: lucee
       - name: Upgrade Lucee to 5.4.3.2 via lco
         run: |
-            cd _actions/lucee/script-runner/main/lucee-download-cache
             curl https://cdn.lucee.org/5.4.3.2.lco -o 5.4.3.2.lco
             cp 5.4.3.2.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.2.lco
             echo "sleeping for 70s"
