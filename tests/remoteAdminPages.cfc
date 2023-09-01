@@ -52,7 +52,8 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                         login_passwordserver: variables.SERVERADMINPASSWORD,
                         lang: "en",
                         rememberMe: "s",
-                        submit: "submit"
+                        submit: "submit",
+                        rawError: true
                     }
                 );
                 systemOutput( loginResult, true );
