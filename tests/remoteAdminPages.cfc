@@ -121,13 +121,13 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
     }
 
     private function checkUrl( required string adminRoot, required string testUrl, required numeric statusCode ){
-        local.page =arguments.testUrl; // i.e "server.cfm?action=plugin&plugin=PerformanceAnalyzer"
-        // systemOutput("", true );
+        local.page = arguments.testUrl; // i.e "server.cfm?action=plugin&plugin=PerformanceAnalyzer"
+        //systemOutput(page, true );
         
         local.start = getTickCount();
         try {
             local.result = remoteRequest(
-                template: page & "&rawError=true",
+                template: adminRoot & page & "&rawError=true",
                 cookies: variables.cookies
             );
             result.status = result.status_code;
@@ -149,7 +149,8 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
         // systemOutput( local.result.headers, true );
         //expect( local.result.status ).toBeBetween( 200, 399, adminRoot & page & " returned status code: " & local.result.status);
         if ( local.result.status neq arguments.statusCode )
-            systemOutput( trim(local.result.filecontent), true );
+            structDelete(local.result, "filecontent")
+            systemOutput( trim(local.result), true );
         expect( local.result.status ).toBe( arguments.statusCode, 
             arguments.adminRoot & page & " returned status code: " & local.result.status );
     }
