@@ -54,14 +54,14 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                         submit: "submit"
                     }
                 );
-                systemOutput(loginResult, true);
+                //systemOutput(loginResult, true);
                 expect( loginResult.status ).toBe( 200, "Status code" );
 
                 variables.cookies = {};
                 loop query=loginResult.cookies {
                     variables.cookies[ loginResult.cookies.name ] = loginResult.cookies.value;
                 }
-                systemOutput(variables.cookies, true);
+                //systemOutput(variables.cookies, true);
             });
 
             it( title="Fetch and test admin pages", body=function(){
@@ -74,10 +74,11 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 );
                 
                 expect( _adminUrls.status ).toBe( 200, "Status Code" );
+                systemOutput( _adminUrls.fileContent );
                 expect( isJson( _adminUrls.fileContent ) ).toBeTrue();
                 local.adminUrls = deserializeJson( _adminUrls.fileContent );
                 expect( adminUrls ).toBeArray();
-                systemOutput( adminUrls, true );
+                //systemOutput( adminUrls, true );
                 systemOutput( "", true );
                 loop array="#adminUrls#" item="local.testUrl" {
                     checkUrl( adminRoot, local.testUrl, 200 );
