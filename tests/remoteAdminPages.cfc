@@ -68,8 +68,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 systemOutput("------------- get admin urls", true);
                 // adminPage = "server.cfm";
                 local._adminUrls = remoteRequest(
-                    template: adminRoot & adminPage,
-                    urls : { testUrls: true },
+                    template: adminRoot & adminPage & "&testUrls=true",
                     cookies: variables.cookies
                 );
                 
