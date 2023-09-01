@@ -27,6 +27,8 @@ jobs:
         run: |
           curl --fail https://cdn.lucee.org/lucee-5.4.2.17-linux-x64-installer.run -o lucee-linux-x64-installer.run
           ls -l
+          mkidr -p /tmp/lucee/tomcat/lucee-server/context
+          cp .CFConfig.json /tmp/lucee/tomcat/lucee-server/context/.CFConfig.json
           chmod +x lucee-linux-x64-installer.run
           sudo ./lucee-linux-x64-installer.run \
             --mode unattended --prefix /tmp/lucee --installconn false --installmodcfml false --installiis false --startatboot false \
@@ -89,4 +91,8 @@ jobs:
         env:
           testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
+      - name: debug failure - application.log TRACE
+        if: ${{ failure() }}
+        run: |
+            cat /tmp/lucee/tomcat/lucee-server/context/logs/application.log
 

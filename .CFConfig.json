@@ -1,0 +1,11 @@
+{
+    "loggers": {
+      "application": {
+        "appenderArguments": "path:{lucee-config}/logs/application.log",
+        "level": "trace",
+        "appenderClass": "lucee.commons.io.log.log4j2.appender.ResourceAppender",
+        "layoutClass": "lucee.commons.io.log.log4j2.layout.ClassicLayout",
+        "layoutArguments": ""
+      }
+    }
+  }
