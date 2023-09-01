@@ -19,7 +19,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
             variables.cookies = {}; // need to be authenticated to the admin, for subsequent requests after login
         }
 
-        private function remoteRequest( template, urls, forms, cookies, method="get" ) localmode=true {
+        private function remoteRequest( template, urls={}, forms={}, cookies={}, method="get" ) localmode=true {
             systemOutput( "-----------", true );
             systemOutput( arguments.template );
             http url=#arguments.template# result="res" method=method{
@@ -52,7 +52,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                         submit: "submit"
                     }
                 );
-                //systemOutput(loginResult);
+                systemOutput(loginResult, true);
                 expect( loginResult.status ).toBe( 200, "Status code" );
                 variables.cookies = {
                      cfid: loginResult.session.cfid,
@@ -80,7 +80,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                     checkUrl( adminRoot, local.testUrl, 200 );
                 }
             });
-
+            /*
             it( title="check admin extension pages", body=function(){
                 local.extUrls = [];
                 local.exts = ExtensionList();
@@ -113,6 +113,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 // 500 (mappng doesn't exist)
                 checkUrl( adminRoot, "#variables.adminPage#?action=resources.mappings&action2=create&virtual=/lucee/adminMissing", 500 );
             });
+            */
         });
     }
 

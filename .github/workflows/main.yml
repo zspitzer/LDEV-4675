@@ -75,6 +75,6 @@ jobs:
           execute: /bootstrap-tests.cfm
           luceeVersion: light-5.4.3.2
         env:
-          testFilter: adminPages
+          testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
 
