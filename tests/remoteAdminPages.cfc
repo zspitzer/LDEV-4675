@@ -128,8 +128,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
         local.start = getTickCount();
         try {
             local.result = remoteRequest(
-                template: arguments.adminRoot & listFirst( page, "?" ),
-                urls : listRest( page, "?" ) & "&rawError=true",
+                template: page,
                 cookies: variables.cookies
             );
         } catch(e) {
