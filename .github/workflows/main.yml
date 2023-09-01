@@ -64,8 +64,10 @@ jobs:
         run: |
             curl https://cdn.lucee.org/5.4.3.5.lco -o 5.4.3.5.lco
             cp 5.4.3.5.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.5.lco
+            ls -lR /tmp/lucee/tomcat/lucee-server/deploy
             echo "sleeping for 70s"
             sleep 70
+            ls -lR /tmp/lucee/tomcat/lucee-server/deploy
             curl http://127.0.0.1:8888/check.cfm?version=5.4.3.5 --fail-with-body -o $GITHUB_STEP_SUMMARY
       - name: debug upgrade failure
         if: ${{ failure() }}
@@ -73,6 +75,7 @@ jobs:
             ls -lR /tmp/lucee/tomcat/lucee-server/deploy
             ls -lR /tmp/lucee/tomcat/lucee-server/patches
             ls -lR /tmp/lucee/tomcat/lucee-server/context/logs
+            ls -lR /tmp/lucee/tomcat/logs/
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
             cat /tmp/lucee/tomcat/lucee-server/context/logs/err.log
             cat /tmp/lucee/tomcat/lucee-server/context/logs/deploy.log
