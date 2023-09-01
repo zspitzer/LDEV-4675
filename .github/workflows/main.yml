@@ -9,6 +9,7 @@ jobs:
   test-linux:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3      
       - name: install 5.4.2.17
         run: |
           curl https://cdn.lucee.org/lucee-5.4.2.17-linux-x64-installer.run -o lucee-linux-x64-installer.run
@@ -37,6 +38,8 @@ jobs:
         with:
           repository: lucee/lucee
           path: lucee
+          sparse-checkout: |
+            tests
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
