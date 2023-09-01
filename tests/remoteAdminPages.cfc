@@ -26,8 +26,10 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 loop collection=arguments.urls key="k" value="v" {
                     httpparam type="url" name=k value=v;
                 }
-                loop collection=arguments.forms key="k" value="v" {
-                    httpparam type="form" name=k value=v;
+                if (method == "post"){
+                    loop collection=arguments.forms key="k" value="v" {
+                        httpparam type="form" name=k value=v;
+                    }
                 }
                 loop collection=arguments.cookies key="k" value="v" {
                     httpparam type="cookie" name=k value=v;

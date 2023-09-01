@@ -58,7 +58,7 @@ jobs:
           execute: /bootstrap-tests.cfm
           luceeVersion: light-5.4.3.2
         env:
-          testFilter: adminPages
+          testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
       - name: Upgrade Lucee to 5.4.3.2 via lco
         run: |
