@@ -60,13 +60,13 @@ jobs:
         env:
           testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
-      - name: Upgrade Lucee to 5.4.3.3 via lco
+      - name: Upgrade Lucee to 5.4.3.5 via lco
         run: |
-            curl https://cdn.lucee.org/5.4.3.3.lco -o 5.4.3.2.lco
-            cp 5.4.3.2.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.2.lco
+            curl https://cdn.lucee.org/5.4.3.5.lco -o 5.4.3.5.lco
+            cp 5.4.3.5.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.5.lco
             echo "sleeping for 70s"
             sleep 70
-            curl http://127.0.0.1:8888/check.cfm?version=5.4.3.3 --fail-with-body -o $GITHUB_STEP_SUMMARY
+            curl http://127.0.0.1:8888/check.cfm?version=5.4.3.5 --fail-with-body -o $GITHUB_STEP_SUMMARY
       - name: debug upgrade failure
         if: ${{ failure() }}
         run: |
@@ -77,7 +77,7 @@ jobs:
             cat /tmp/lucee/tomcat/lucee-server/context/logs/err.log
             cat /tmp/lucee/tomcat/lucee-server/context/logs/deploy.log
             cat /tmp/lucee/tomcat/logs/catalina.out
-      - name: Run Lucee Test Suite, testFilter="adminPages" 5.4.3.2
+      - name: Run Lucee Test Suite, testFilter="adminPages" 5.4.3.5
         uses: lucee/script-runner@main
         with:
           webroot: ${{ github.workspace }}/lucee/test
