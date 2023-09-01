@@ -21,12 +21,13 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
 
         private function remoteRequest( template, urls={}, forms={}, cookies={}, method="get" ) localmode=true {
             systemOutput( "-----------", true );
-            systemOutput( arguments.template, true );
+            systemOutput( arguments.method & " " & arguments.template, true );
+            systemOutput( arguments, true );
             http url=#arguments.template# result="res" method=method{
                 loop collection=arguments.urls key="k" value="v" {
                     httpparam type="url" name=k value=v;
                 }
-                if (method == "post"){
+                if ( arguments.method eq "post" ){
                     loop collection=arguments.forms key="k" value="v" {
                         httpparam type="form" name=k value=v;
                     }
@@ -43,11 +44,11 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
             setup();
             
             it( title="Login to admin", body=function(){
-                //systemOutput("------------- login to admin", true);
+                systemOutput("------------- login to admin", true);
                 local.loginResult = remoteRequest(
                     template: adminRoot & adminPage, 
+                    method: "post",
                     forms: {
-                        method: "post",
                         login_passwordserver: variables.SERVERADMINPASSWORD,
                         lang: "en",
                         rememberMe: "s",
@@ -61,7 +62,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 loop query=loginResult.cookies {
                     variables.cookies[ loginResult.cookies.name ] = loginResult.cookies.value;
                 }
-                //systemOutput(variables.cookies, true);
+                systemOutput(variables.cookies, true);
             });
 
             it( title="Fetch and test admin pages", body=function(){
