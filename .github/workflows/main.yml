@@ -63,7 +63,7 @@ jobs:
       - name: Upgrade Lucee to 5.4.3.5-SNAPSHOT via lco
         run: |
             curl --fail https://cdn.lucee.org/5.4.3.5-SNAPSHOT.lco -o 5.4.3.5-SNAPSHOT.lco
-            cp 5.4.3.5.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.5-SNAPSHOT.lco
+            cp 5.4.3.5-SNAPSHOT.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.5-SNAPSHOT.lco
             ls -lR /tmp/lucee/tomcat/lucee-server/deploy
             echo "sleeping for 70s"
             sleep 70
