@@ -18,7 +18,10 @@ jobs:
       - name: Cache Lucee files
         uses: actions/cache@v3
         with:
-          path: _actions/lucee/script-runner/main/lucee-download-cache
+          path: |
+            _actions/lucee/script-runner/main/lucee-download-cache
+            ./*.run
+            ./*.lco
           key: lucee-downloads
       - name: install 5.4.2.17
         run: |
@@ -59,7 +62,7 @@ jobs:
       - name: Run Lucee Test Suite, testFilter="adminPages"
         uses: lucee/script-runner@main
         with:
-          webroot: ${{ github.workspace }}/lucee/tests
+          webroot: ${{ github.workspace }}/lucee/test
           execute: /bootstrap-tests.cfm
           luceeVersion: light-5.4.3.2
         env:
