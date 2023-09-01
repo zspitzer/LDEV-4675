@@ -22,8 +22,6 @@ jobs:
           key: lucee-downloads
       - name: install 5.4.2.17
         run: |
-          mkdir _actions/lucee/script-runner/main/lucee-download-cache
-          cd _actions/lucee/script-runner/main/lucee-download-cache
           curl https://cdn.lucee.org/lucee-5.4.2.17-linux-x64-installer.run -o lucee-linux-x64-installer.run
           ls -l
           chmod +x lucee-linux-x64-installer.run
