@@ -55,7 +55,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                         submit: "submit"
                     }
                 );
-                //systemOutput(loginResult, true);
+                systemOutput( loginResult, true );
                 expect( loginResult.status ).toBe( 200, "Status code" );
                 //systemOutput(loginResult.cookies, true);
                 variables.cookies = {};
@@ -79,7 +79,8 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 expect( isJson( _adminUrls.fileContent ) ).toBeTrue();
                 local.adminUrls = deserializeJson( _adminUrls.fileContent );
                 expect( adminUrls ).toBeArray();
-                //systemOutput( adminUrls, true );
+                expect( arrayLen( adminUrls ) ).toBeGT( 1 );
+                systemOutput( adminUrls, true );
                 systemOutput( "", true );
                 loop array="#adminUrls#" item="local.testUrl" {
                     checkUrl( adminRoot, local.testUrl, 200 );
