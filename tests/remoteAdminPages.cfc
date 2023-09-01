@@ -58,8 +58,8 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 expect( loginResult.status ).toBe( 200, "Status code" );
 
                 variables.cookies = {};
-                loop query=res.cookies {
-                    variables.cookies[ res.cookies.name ] = res.cookies.value;
+                loop query=loginResult.cookies {
+                    variables.cookies[ loginResult.cookies.name ] = loginResult.cookies.value;
                 }
                 
             });
