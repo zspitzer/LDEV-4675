@@ -22,7 +22,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
         private function remoteRequest( template, urls={}, forms={}, cookies={}, method="get" ) localmode=true {
             systemOutput( "-----------", true );
             systemOutput( arguments.method & " " & arguments.template, true );
-            systemOutput( arguments, true );
+            //systemOutput( arguments, true );
             http url=#arguments.template# result="res" method=method{
                 loop collection=arguments.urls key="k" value="v" {
                     httpparam type="url" name=k value=v;
@@ -57,12 +57,13 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 );
                 //systemOutput(loginResult, true);
                 expect( loginResult.status ).toBe( 200, "Status code" );
-
+                //systemOutput(loginResult.cookies, true);
                 variables.cookies = {};
                 loop query=loginResult.cookies {
                     variables.cookies[ loginResult.cookies.name ] = loginResult.cookies.value;
                 }
-                systemOutput(variables.cookies, true);
+                //systemOutput(variables.cookies, true);
+                expect(structCount(variables.cookies)).toBe(5);
             });
 
             it( title="Fetch and test admin pages", body=function(){
@@ -72,9 +73,9 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                     template: adminRoot & adminPage & "?testUrls=true",
                     cookies: variables.cookies
                 );
-                
+                //systemOutput( _adminUrls.fileContent );
                 expect( _adminUrls.status ).toBe( 200, "Status Code" );
-                systemOutput( _adminUrls.fileContent );
+                
                 expect( isJson( _adminUrls.fileContent ) ).toBeTrue();
                 local.adminUrls = deserializeJson( _adminUrls.fileContent );
                 expect( adminUrls ).toBeArray();
@@ -84,7 +85,6 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                     checkUrl( adminRoot, local.testUrl, 200 );
                 }
             });
-            /*
             it( title="check admin extension pages", body=function(){
                 local.extUrls = [];
                 local.exts = ExtensionList();
@@ -117,7 +117,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 // 500 (mappng doesn't exist)
                 checkUrl( adminRoot, "#variables.adminPage#?action=resources.mappings&action2=create&virtual=/lucee/adminMissing", 500 );
             });
-            */
+            
         });
     }
 
