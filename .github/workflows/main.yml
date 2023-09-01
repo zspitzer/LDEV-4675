@@ -58,7 +58,7 @@ jobs:
         with:
           webroot: ${{ github.workspace }}/lucee/test
           execute: /bootstrap-tests.cfm
-          luceeVersionQuery: 6/light/all
+          luceeVersionQuery: 6/all/light
         env:
           testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
@@ -87,7 +87,7 @@ jobs:
         with:
           webroot: ${{ github.workspace }}/lucee/test
           execute: /bootstrap-tests.cfm
-          luceeVersionQuery: 6/light/all
+          luceeVersionQuery: 6/all/light
         env:
           testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
