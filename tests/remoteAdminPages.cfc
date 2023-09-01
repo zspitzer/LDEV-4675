@@ -130,7 +130,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 template: page & "&rawError=true",
                 cookies: variables.cookies
             );
-            local.result.status = res.status_code;
+            result.status = result.status_code;
         } catch(e) {
             if ( arguments.statusCode neq 500 ){
                 rethrow;
