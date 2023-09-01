@@ -54,10 +54,11 @@ jobs:
             echo "sleeping for 70s"
             sleep 70
             curl http://127.0.0.1:8888/index.cfm?version=5.4.3.2 --fail-with-body -o $GITHUB_STEP_SUMMARY
+            ls -lR
       - name: Run Lucee Test Suite, testFilter="adminPages"
         uses: lucee/script-runner@main
         with:
-          webroot: ${{ github.workspace }}/lucee/test
+          webroot: ${{ github.workspace }}/lucee/tests
           execute: /bootstrap-tests.cfm
           luceeVersion: light-5.4.3.2
         env:
