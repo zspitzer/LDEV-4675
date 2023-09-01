@@ -35,7 +35,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                     httpparam type="cookie" name=k value=v;
                 }
             }
-            systemOutput(res, true);
+            res.status=res.status_code;
             return res;
         }
        
@@ -56,10 +56,12 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 );
                 systemOutput(loginResult, true);
                 expect( loginResult.status ).toBe( 200, "Status code" );
-                variables.cookies = {
-                     cfid: loginResult.session.cfid,
-                     cftoken: loginResult.session.cftoken
-                };
+
+                variables.cookies = {};
+                loop query=res.cookies {
+                    variables.cookies[ res.cookies.name ] = res.cookies.value;
+                }
+                
             });
 
             it( title="Fetch and test admin pages", body=function(){
