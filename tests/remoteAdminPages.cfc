@@ -21,7 +21,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
 
         private function remoteRequest( template, urls={}, forms={}, cookies={}, method="get" ) localmode=true {
             systemOutput( "-----------", true );
-            systemOutput( arguments.template );
+            systemOutput( arguments.template, true );
             http url=#arguments.template# result="res" method=method{
                 loop collection=arguments.urls key="k" value="v" {
                     httpparam type="url" name=k value=v;
@@ -61,11 +61,11 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 loop query=loginResult.cookies {
                     variables.cookies[ loginResult.cookies.name ] = loginResult.cookies.value;
                 }
-                
+                systemOutput(variables.cookies, true);
             });
 
             it( title="Fetch and test admin pages", body=function(){
-                //systemOutput("------------- get admin urls", true);
+                systemOutput("------------- get admin urls", true);
                 // adminPage = "server.cfm";
                 local._adminUrls = remoteRequest(
                     template: adminRoot & adminPage,
@@ -74,11 +74,11 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 );
                 
                 expect( _adminUrls.status ).toBe( 200, "Status Code" );
-                //expect(_adminUrls.fileContent).toBeJson();
+                expect(_adminUrls.fileContent).toBeJson();
                 expect( isJson( _adminUrls.fileContent ) ).toBeTrue();
                 local.adminUrls = deserializeJson( _adminUrls.fileContent );
                 expect( adminUrls ).toBeArray();
-                // systemOutput( adminUrls, true );
+                systemOutput( adminUrls, true );
                 systemOutput( "", true );
                 loop array="#adminUrls#" item="local.testUrl" {
                     checkUrl( adminRoot, local.testUrl, 200 );
@@ -128,7 +128,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
         local.start = getTickCount();
         try {
             local.result = remoteRequest(
-                template: page,
+                template: page & "&rawError=true",
                 cookies: variables.cookies
             );
         } catch(e) {
