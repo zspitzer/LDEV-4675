@@ -74,7 +74,6 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 );
                 
                 expect( _adminUrls.status ).toBe( 200, "Status Code" );
-                expect(_adminUrls.fileContent).toBeJson();
                 expect( isJson( _adminUrls.fileContent ) ).toBeTrue();
                 local.adminUrls = deserializeJson( _adminUrls.fileContent );
                 expect( adminUrls ).toBeArray();
