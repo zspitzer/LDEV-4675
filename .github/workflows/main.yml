@@ -25,7 +25,7 @@ jobs:
           key: lucee-downloads
       - name: install 5.4.2.17
         run: |
-          curl https://cdn.lucee.org/lucee-5.4.2.17-linux-x64-installer.run -o lucee-linux-x64-installer.run
+          curl --fail https://cdn.lucee.org/lucee-5.4.2.17-linux-x64-installer.run -o lucee-linux-x64-installer.run
           ls -l
           chmod +x lucee-linux-x64-installer.run
           sudo ./lucee-linux-x64-installer.run \
@@ -60,15 +60,15 @@ jobs:
         env:
           testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
-      - name: Upgrade Lucee to 5.4.3.5 via lco
+      - name: Upgrade Lucee to 5.4.3.5-SNAPSHOT via lco
         run: |
-            curl https://cdn.lucee.org/5.4.3.5.lco -o 5.4.3.5.lco
-            cp 5.4.3.5.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.5.lco
+            curl --fail https://cdn.lucee.org/5.4.3.5-SNAPSHOT.lco -o 5.4.3.5-SNAPSHOT.lco
+            cp 5.4.3.5.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.5-SNAPSHOT.lco
             ls -lR /tmp/lucee/tomcat/lucee-server/deploy
             echo "sleeping for 70s"
             sleep 70
             ls -lR /tmp/lucee/tomcat/lucee-server/deploy
-            curl http://127.0.0.1:8888/check.cfm?version=5.4.3.5 --fail-with-body -o $GITHUB_STEP_SUMMARY
+            curl http://127.0.0.1:8888/check.cfm?version=5.4.3.5-SNAPSHOT --fail-with-body -o $GITHUB_STEP_SUMMARY
       - name: debug upgrade failure
         if: ${{ failure() }}
         run: |
@@ -80,7 +80,7 @@ jobs:
             cat /tmp/lucee/tomcat/lucee-server/context/logs/err.log
             cat /tmp/lucee/tomcat/lucee-server/context/logs/deploy.log
             cat /tmp/lucee/tomcat/logs/catalina.out
-      - name: Run Lucee Test Suite, testFilter="adminPages" 5.4.3.5
+      - name: Run Lucee Test Suite, testFilter="adminPages" 5.4.3.5-SNAPSHOT
         uses: lucee/script-runner@main
         with:
           webroot: ${{ github.workspace }}/lucee/test
