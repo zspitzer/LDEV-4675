@@ -60,9 +60,9 @@ jobs:
         env:
           testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
-      - name: Upgrade Lucee to 5.4.3.2 via lco
+      - name: Upgrade Lucee to 5.4.3.3 via lco
         run: |
-            curl https://cdn.lucee.org/5.4.3.5.lco -o 5.4.3.2.lco
+            curl https://cdn.lucee.org/5.4.3.3.lco -o 5.4.3.2.lco
             cp 5.4.3.2.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.2.lco
             echo "sleeping for 70s"
             sleep 70
