@@ -95,4 +95,5 @@ jobs:
         if: ${{ failure() }}
         run: |
             cat /tmp/lucee/tomcat/lucee-server/context/logs/application.log
+            cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
 
