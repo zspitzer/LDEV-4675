@@ -100,10 +100,10 @@ jobs:
             cat /tmp/lucee/tomcat/lucee-server/context/logs/exception.log || true
             echo "-----------catalina.out"
             cat /tmp/lucee/tomcat/logs/catalina.out
-            echo "-----------Web application.log
+            echo "-----------Web application.log"
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/application.log
-            echo "-----------Web exception.log
-            cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/exception.log
+            echo "-----------Web exception.log"
+            cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/exception.log || true
       - name: Run Lucee Test Suite, testFilter="adminPages" 5.4.3.5-SNAPSHOT
         uses: lucee/script-runner@main
         with:
@@ -122,11 +122,11 @@ jobs:
             cat /tmp/lucee/tomcat/lucee-server/context/logs/exception.log || true
             echo "-----------server deploy.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/deploy.log
-            echo "------------Server out.log
+            echo "------------Server out.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
-            echo "------------Web application.log
+            echo "------------Web application.log"
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/application.log
-            echo "-----------Web exception.log
+            echo "-----------Web exception.log"
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/exception.log || true
             echo "-----------lucee-server.xml"
             cat /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
