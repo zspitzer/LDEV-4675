@@ -44,14 +44,15 @@ jobs:
           curl http://127.0.0.1:8888/check.cfm?version=5.4.2.17 --fail-with-body -o $GITHUB_STEP_SUMMARY
           #sleep 5
           #sudo /tmp/lucee/lucee_ctl stop
-          cat /tmp/lucee/install.log
+          ls -lRHa /tmp/lucee/
+          #cat /tmp/lucee/install.log
       - name: debug failure
         if: ${{ failure() }}
         run: |
             cat /tmp/lucee/tomcat/logs/catalina.out
             #cat /tmp/lucee/install.log
             cd /tmp/lucee
-            ls -lR
+            ls -laRH
             #cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
             #cat /tmp/lucee/tomcat/lucee-server/context/logs/err.log
             #cat /tmp/lucee/tomcat/logs/catalina.out
@@ -81,7 +82,7 @@ jobs:
       - name: debug upgrade failure
         if: ${{ failure() }}
         run: |
-            ls -lR /tmp/lucee/tomcat/lucee-server/deploy
+            ls -lRa /tmp/lucee/tomcat/lucee-server/deploy
             ls -lR /tmp/lucee/tomcat/lucee-server/patches
             ls -lR /tmp/lucee/tomcat/lucee-server/context/logs
             ls -lR /tmp/lucee/tomcat/logs/
