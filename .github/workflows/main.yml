@@ -33,11 +33,12 @@ jobs:
           ls -lah
 
           #mkdir -p /tmp/lucee/tomcat/lucee-server/context
-          #mkdir -p /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee
           #cp .CFConfig.json /tmp/lucee/tomcat/lucee-server/context/.CFConfig.json
           #cp lucee-server.xml /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
           #echo "webweb" /tmp/lucee/tomcat/lucee-server/context/password.txt
-          #cp .CFConfig.json /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/.CFConfig.json
+
+          mkdir -p /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee
+          cp lucee-web.xml.cfm /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/lucee-web.xml.cfm
 
           chmod +x lucee-linux-x64-installer.run
           sudo ./lucee-linux-x64-installer.run \
