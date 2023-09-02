@@ -52,15 +52,15 @@ jobs:
           #ls -lRHa /tmp/lucee/tomcat/lucee-server
           #cat /tmp/lucee/install.log
       - name: debug initial install failure
-        if: ${{ failure() }}
+        if: ${{ always() }}
         run: |
             echo "-----------catalina.out"
             cat /tmp/lucee/tomcat/logs/catalina.out
             echo "-----------out.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
             #cat /tmp/lucee/install.log
-            cd /tmp/lucee
-            ls -laRH
+            #cd /tmp/lucee
+            #ls -laRH
             #cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
             #cat /tmp/lucee/tomcat/lucee-server/context/logs/err.log
             #cat /tmp/lucee/tomcat/logs/catalina.out
