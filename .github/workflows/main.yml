@@ -52,6 +52,13 @@ jobs:
           #sudo /tmp/lucee/lucee_ctl stop
           #ls -lRHa /tmp/lucee/tomcat/lucee-server
           #cat /tmp/lucee/install.log
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: xml-config
+          path: |
+              /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
+              /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/lucee-web.xml.cfm
       - name: debug initial install failure
         if: success() || failure()
         run: |
