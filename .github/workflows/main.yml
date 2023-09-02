@@ -32,6 +32,7 @@ jobs:
           mkdir -p /tmp/lucee/tomcat/lucee-server/context
           mkdir -p /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee
           cp .CFConfig.json /tmp/lucee/tomcat/lucee-server/context/.CFConfig.json
+          cp lucee-server.xml /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
           cp .CFConfig.json /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/.CFConfig.json
           chmod +x lucee-linux-x64-installer.run
           sudo ./lucee-linux-x64-installer.run \
@@ -43,6 +44,7 @@ jobs:
           curl http://127.0.0.1:8888/check.cfm?version=5.4.2.17 --fail-with-body -o $GITHUB_STEP_SUMMARY
           #sleep 5
           #sudo /tmp/lucee/lucee_ctl stop
+          cat /tmp/lucee/install.log
       - name: debug failure
         if: ${{ failure() }}
         run: |
@@ -99,7 +101,11 @@ jobs:
       - name: debug failure - application.log TRACE
         if: ${{ failure() }}
         run: |
+            echo "Server application.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/application.log
+            echo "Server out.log
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
+            echo "Web application.log
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/application.log
+            ls -lR /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/
 
