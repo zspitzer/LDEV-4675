@@ -29,8 +29,9 @@ jobs:
           LUCEE_ADDITIONAL_CONFIG_SERVER_DIR: ${{ github.workspace }}
         run: |
           curl --fail https://cdn.lucee.org/lucee-5.4.2.17-linux-x64-installer.run -o lucee-linux-x64-installer.run
-          ls -l
-          
+          pwd
+          ls -lah
+
           #mkdir -p /tmp/lucee/tomcat/lucee-server/context
           #mkdir -p /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee
           #cp .CFConfig.json /tmp/lucee/tomcat/lucee-server/context/.CFConfig.json
@@ -43,12 +44,12 @@ jobs:
             --mode unattended --prefix /tmp/lucee --installconn false --installmodcfml false --installiis false --startatboot false \
             --luceepass webweb --systemuser $USER --installjre true
           sleep 5;
-          ls -l /tmp/lucee/tomcat/lucee-server/context
+          ls -lha /tmp/lucee/tomcat/lucee-server/context
           echo "<cfscript>if (server.lucee.version neq url.version) header statuscode='500' statustext='wrong version #server.lucee.version#'; echo('## Lucee Linux ' & server.lucee.version & ', using java ' & server.java.version);</cfscript>" > /tmp/lucee/tomcat/webapps/ROOT/check.cfm
           curl http://127.0.0.1:8888/check.cfm?version=5.4.2.17 --fail-with-body -o $GITHUB_STEP_SUMMARY
           #sleep 5
           #sudo /tmp/lucee/lucee_ctl stop
-          ls -lRHa /tmp/lucee/tomcat/lucee-server
+          #ls -lRHa /tmp/lucee/tomcat/lucee-server
           #cat /tmp/lucee/install.log
       - name: debug initial install failure
         if: ${{ failure() }}
@@ -90,9 +91,9 @@ jobs:
         if: ${{ failure() }}
         run: |
             ls -lRa /tmp/lucee/tomcat/lucee-server/deploy
-            ls -lR /tmp/lucee/tomcat/lucee-server/patches
-            ls -lR /tmp/lucee/tomcat/lucee-server/context/logs
-            ls -lR /tmp/lucee/tomcat/logs/
+            ls -lRh /tmp/lucee/tomcat/lucee-server/patches
+            ls -lRh /tmp/lucee/tomcat/lucee-server/context/logs
+            ls -lRh /tmp/lucee/tomcat/logs/
             echo "-----------out.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
             echo "-----------err.log"
