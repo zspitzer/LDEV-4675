@@ -34,7 +34,7 @@ jobs:
 
           #mkdir -p /tmp/lucee/tomcat/lucee-server/context
           #cp .CFConfig.json /tmp/lucee/tomcat/lucee-server/context/.CFConfig.json
-          #cp lucee-server.xml /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
+          cp lucee-server.xml /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
           #echo "webweb" /tmp/lucee/tomcat/lucee-server/context/password.txt
 
           mkdir -p /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee
@@ -120,11 +120,17 @@ jobs:
             cat /tmp/lucee/tomcat/lucee-server/context/logs/application.log
             echo "-----------server exception.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/exception.log
+            echo "-----------server deploy.log"
+            cat /tmp/lucee/tomcat/lucee-server/context/logs/deploy.log
             echo "------------Server out.log
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
             echo "------------Web application.log
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/application.log
             echo "-----------Web exception.log
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/exception.log
+            echo "-----------lucee-server.xml"
+            cat /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
+            echo "-----------lucee-web.xml.cfm"
+            cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/lucee-web.xml.cfm
             ls -lR /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/temp/compress
 
