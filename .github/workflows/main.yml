@@ -131,6 +131,7 @@ jobs:
             echo "-----------lucee-server.xml"
             cat /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
             echo "-----------lucee-web.xml.cfm"
+            ls -lah /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/lucee-web.xml.cfm
             ls -lR /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/temp/compress
 
