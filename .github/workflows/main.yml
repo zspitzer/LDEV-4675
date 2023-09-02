@@ -25,16 +25,19 @@ jobs:
           key: lucee-downloads
       - name: install 5.4.2.17
         env:
-          aaaLUCEE_ADDITIONAL_CONFIG_SERVER_DIR: ${{ github.workspace }}
+          LUCEE_ADDITIONAL_CONFIG: true
+          LUCEE_ADDITIONAL_CONFIG_SERVER_DIR: ${{ github.workspace }}
         run: |
           curl --fail https://cdn.lucee.org/lucee-5.4.2.17-linux-x64-installer.run -o lucee-linux-x64-installer.run
           ls -l
-          mkdir -p /tmp/lucee/tomcat/lucee-server/context
+          
+          #mkdir -p /tmp/lucee/tomcat/lucee-server/context
           #mkdir -p /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee
           #cp .CFConfig.json /tmp/lucee/tomcat/lucee-server/context/.CFConfig.json
-          cp lucee-server.xml /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
-          echo "webweb" /tmp/lucee/tomcat/lucee-server/context/password.txt
+          #cp lucee-server.xml /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
+          #echo "webweb" /tmp/lucee/tomcat/lucee-server/context/password.txt
           #cp .CFConfig.json /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/.CFConfig.json
+
           chmod +x lucee-linux-x64-installer.run
           sudo ./lucee-linux-x64-installer.run \
             --mode unattended --prefix /tmp/lucee --installconn false --installmodcfml false --installiis false --startatboot false \
@@ -47,7 +50,7 @@ jobs:
           #sudo /tmp/lucee/lucee_ctl stop
           ls -lRHa /tmp/lucee/tomcat/lucee-server
           #cat /tmp/lucee/install.log
-      - name: debug failure
+      - name: debug initial install failure
         if: ${{ failure() }}
         run: |
             echo "-----------catalina.out"
