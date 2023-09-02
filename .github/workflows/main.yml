@@ -33,6 +33,7 @@ jobs:
           mkdir -p /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee
           cp .CFConfig.json /tmp/lucee/tomcat/lucee-server/context/.CFConfig.json
           cp lucee-server.xml /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
+          echo "webweb" /tmp/lucee/tomcat/lucee-server/context/password.txt
           cp .CFConfig.json /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/.CFConfig.json
           chmod +x lucee-linux-x64-installer.run
           sudo ./lucee-linux-x64-installer.run \
@@ -49,7 +50,10 @@ jobs:
       - name: debug failure
         if: ${{ failure() }}
         run: |
+            echo "-----------catalina.out"
             cat /tmp/lucee/tomcat/logs/catalina.out
+            echo "-----------out.log"
+            cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
             #cat /tmp/lucee/install.log
             cd /tmp/lucee
             ls -laRH
