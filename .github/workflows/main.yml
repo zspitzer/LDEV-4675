@@ -32,9 +32,9 @@ jobs:
           pwd
           ls -lah
 
-          mkdir -p /tmp/lucee/tomcat/lucee-server/context
+          #mkdir -p /tmp/lucee/tomcat/lucee-server/context
           #cp .CFConfig.json /tmp/lucee/tomcat/lucee-server/context/.CFConfig.json
-          cp lucee-server.xml /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
+          #cp lucee-server.xml /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
           #echo "webweb" /tmp/lucee/tomcat/lucee-server/context/password.txt
 
           mkdir -p /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee
