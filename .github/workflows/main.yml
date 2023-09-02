@@ -119,7 +119,7 @@ jobs:
             echo "------------Server application.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/application.log
             echo "-----------server exception.log"
-            cat /tmp/lucee/tomcat/lucee-server/context/logs/exception.log
+            cat /tmp/lucee/tomcat/lucee-server/context/logs/exception.log || true
             echo "-----------server deploy.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/deploy.log
             echo "------------Server out.log
@@ -127,7 +127,7 @@ jobs:
             echo "------------Web application.log
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/application.log
             echo "-----------Web exception.log
-            cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/exception.log
+            cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/exception.log || true
             echo "-----------lucee-server.xml"
             cat /tmp/lucee/tomcat/lucee-server/context/lucee-server.xml
             echo "-----------lucee-web.xml.cfm"
