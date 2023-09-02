@@ -53,18 +53,13 @@ jobs:
           #ls -lRHa /tmp/lucee/tomcat/lucee-server
           #cat /tmp/lucee/install.log
       - name: debug initial install failure
-        if: ${{ always() }}
+        if: success() || failure()
         run: |
             echo "-----------catalina.out"
             cat /tmp/lucee/tomcat/logs/catalina.out
             echo "-----------out.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
-            #cat /tmp/lucee/install.log
-            #cd /tmp/lucee
-            #ls -laRH
-            #cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
-            #cat /tmp/lucee/tomcat/lucee-server/context/logs/err.log
-            #cat /tmp/lucee/tomcat/logs/catalina.out
+            cat /tmp/lucee/install.log
       - name: Checkout Lucee
         uses: actions/checkout@v3
         with:
@@ -89,22 +84,26 @@ jobs:
             ls -lR /tmp/lucee/tomcat/lucee-server/deploy
             curl http://127.0.0.1:8888/check.cfm?version=5.4.3.5-SNAPSHOT --fail-with-body -o $GITHUB_STEP_SUMMARY
       - name: debug upgrade failure
-        if: ${{ failure() }}
+        if: success() || failure()
         run: |
-            ls -lRa /tmp/lucee/tomcat/lucee-server/deploy
-            ls -lRh /tmp/lucee/tomcat/lucee-server/patches
+            #ls -lRa /tmp/lucee/tomcat/lucee-server/deploy
+            #ls -lRh /tmp/lucee/tomcat/lucee-server/patches
             ls -lRh /tmp/lucee/tomcat/lucee-server/context/logs
             ls -lRh /tmp/lucee/tomcat/logs/
-            echo "-----------out.log"
+            echo "-----------server out.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
-            echo "-----------err.log"
+            echo "-----------server err.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/err.log
-            echo "-----------deploy.log"
+            echo "-----------server deploy.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/deploy.log
+            echo "-----------server exception.log"
+            cat /tmp/lucee/tomcat/lucee-server/context/logs/exception.log
             echo "-----------catalina.out"
             cat /tmp/lucee/tomcat/logs/catalina.out
             echo "-----------Web application.log
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/application.log
+            echo "-----------Web exception.log
+            cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/exception.log
       - name: Run Lucee Test Suite, testFilter="adminPages" 5.4.3.5-SNAPSHOT
         uses: lucee/script-runner@main
         with:
@@ -115,13 +114,17 @@ jobs:
           testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
       - name: debug failure - application.log TRACE
-        if: ${{ failure() }}
+        if: success() || failure()
         run: |
             echo "------------Server application.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/application.log
+            echo "-----------server exception.log"
+            cat /tmp/lucee/tomcat/lucee-server/context/logs/exception.log
             echo "------------Server out.log
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
             echo "------------Web application.log
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/application.log
-            ls -lR /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/
+            echo "-----------Web exception.log
+            cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/logs/exception.log
+            ls -lR /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/temp/compress
 
