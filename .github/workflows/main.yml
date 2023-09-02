@@ -92,12 +92,12 @@ jobs:
             ls -lRh /tmp/lucee/tomcat/logs/
             echo "-----------server out.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
-            #echo "-----------server err.log"
-            #cat /tmp/lucee/tomcat/lucee-server/context/logs/err.log
+            echo "-----------server err.log"
+            cat /tmp/lucee/tomcat/lucee-server/context/logs/err.log || true
             echo "-----------server deploy.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/deploy.log
             echo "-----------server exception.log"
-            cat /tmp/lucee/tomcat/lucee-server/context/logs/exception.log
+            cat /tmp/lucee/tomcat/lucee-server/context/logs/exception.log || true
             echo "-----------catalina.out"
             cat /tmp/lucee/tomcat/logs/catalina.out
             echo "-----------Web application.log
