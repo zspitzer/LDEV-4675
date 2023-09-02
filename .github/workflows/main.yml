@@ -141,5 +141,7 @@ jobs:
             echo -e "\n\n-----------lucee-web.xml.cfm"
             cat /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/lucee-web.xml.cfm
             echo -e "\n\n-----------Server temp compress folder"
-            ls -lRah /tmp/lucee/tomcat/lucee-server/context/temp/compress
+            ls -lRah /tmp/lucee/tomcat/lucee-server/context/temp || true
+            echo -e "\n\n-----------Web temp compress folder"
+            ls -lRah /tmp/lucee/tomcat/webapps/ROOT/WEB-INF/lucee/temp || true
 
