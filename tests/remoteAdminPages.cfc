@@ -46,14 +46,13 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
             it( title="Login to admin", body=function(){
                 systemOutput("------------- login to admin", true);
                 local.loginResult = remoteRequest(
-                    template: adminRoot & adminPage, 
+                    template: adminRoot & adminPage & "?rawError=true",
                     method: "post",
                     forms: {
                         login_passwordserver: variables.SERVERADMINPASSWORD,
                         lang: "en",
                         rememberMe: "s",
-                        submit: "submit",
-                        rawError: true
+                        submit: "submit"
                     }
                 );
                 systemOutput( loginResult, true );
@@ -71,7 +70,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                 systemOutput("------------- get admin urls", true);
                 // adminPage = "server.cfm";
                 local._adminUrls = remoteRequest(
-                    template: adminRoot & adminPage & "?testUrls=true",
+                    template: adminRoot & adminPage & "?testUrls=true&rawError=true",
                     cookies: variables.cookies
                 );
                 //systemOutput( _adminUrls.fileContent );
