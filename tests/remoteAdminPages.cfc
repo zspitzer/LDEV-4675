@@ -36,6 +36,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                     httpparam type="cookie" name=k value=v;
                 }
             }
+            res.fileContent = trim( res.fileContent );
             res.status=res.status_code;
             return res;
         }
@@ -55,7 +56,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                         submit: "submit"
                     }
                 );
-                systemOutput( loginResult, true );
+                //systemOutput( loginResult, true );
                 expect( loginResult.status ).toBe( 200, "Status code" );
                 //systemOutput(loginResult.cookies, true);
                 variables.cookies = {};
@@ -151,8 +152,10 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
         // systemOutput( local.result.headers, true );
         //expect( local.result.status ).toBeBetween( 200, 399, adminRoot & page & " returned status code: " & local.result.status);
         if ( local.result.status neq arguments.statusCode ) {
-            structDelete(local.result, "filecontent");
+            //structDelete(local.result, "filecontent");
             systemOutput( local.result, true );
+            systemOutput( "", true );
+            systemOutput( local.result.filecontent, true );
         }
         expect( local.result.status ).toBe( arguments.statusCode, 
             arguments.adminRoot & page & " returned status code: " & local.result.status );
