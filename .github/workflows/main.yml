@@ -59,7 +59,7 @@ jobs:
             cat /tmp/lucee/tomcat/logs/catalina.out
             echo "-----------out.log"
             cat /tmp/lucee/tomcat/lucee-server/context/logs/out.log
-            cat /tmp/lucee/install.log
+            #cat /tmp/lucee/install.log
       - name: Checkout Lucee
         uses: actions/checkout@v3
         with:
