@@ -108,8 +108,8 @@ jobs:
             curl --fail https://cdn.lucee.org/${{ env.LUCEE_VERSION }}.lco -o ${{ env.LUCEE_VERSION }}.lco
             cp ${{ env.LUCEE_VERSION }}.lco /tmp/lucee/tomcat/lucee-server/deploy/${{ env.LUCEE_VERSION }}.lco
             ls -lR /tmp/lucee/tomcat/lucee-server/deploy
-            echo "sleeping for 70s"
-            sleep 70
+            #echo "sleeping for 70s"
+            sudo /tmp/lucee/lucee_ctl restart
             ls -lR /tmp/lucee/tomcat/lucee-server/deploy
             curl http://127.0.0.1:8888/check.cfm?version=${{ env.LUCEE_VERSION }} --fail-with-body -o $GITHUB_STEP_SUMMARY
       - name: debug upgrade failure
