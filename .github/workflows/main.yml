@@ -3,7 +3,21 @@ name: Test Lucee admin Upgrade
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      LUCEE_VERSION:
+        description: Which version of Lucee to test the upgrade against
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      LUCEE_VERSION:
+        description: Which version of Lucee to test the upgrade against
+        required: true
+        type: string
   push:
+
+env:
+  LUCEE_VERSION: ${{ github.event.inputs.LUCEE_VERSION }}
 
 jobs:
   test-linux:
@@ -82,15 +96,15 @@ jobs:
           testFilter: remoteAdminPages
           testAdditional: ${{ github.workspace }}/tests
       - name: Upgrade Lucee to 5.4.3.5-SNAPSHOT via lco
-        if: failure()
         run: |
-            curl --fail https://cdn.lucee.org/5.4.3.5-SNAPSHOT.lco -o 5.4.3.5-SNAPSHOT.lco
-            cp 5.4.3.5-SNAPSHOT.lco /tmp/lucee/tomcat/lucee-server/deploy/5.4.3.5-SNAPSHOT.lco
+            echo ${{ env.LUCEE_VERSION }}
+            curl --fail https://cdn.lucee.org/${{ env.LUCEE_VERSION }}.lco -o ${{ env.LUCEE_VERSION }}.lco
+            cp ${{ env.LUCEE_VERSION }}.lco /tmp/lucee/tomcat/lucee-server/deploy/${{ env.LUCEE_VERSION }}.lco
             ls -lR /tmp/lucee/tomcat/lucee-server/deploy
             echo "sleeping for 70s"
             sleep 70
             ls -lR /tmp/lucee/tomcat/lucee-server/deploy
-            curl http://127.0.0.1:8888/check.cfm?version=5.4.3.5-SNAPSHOT --fail-with-body -o $GITHUB_STEP_SUMMARY
+            curl http://127.0.0.1:8888/check.cfm?version=${{ env.LUCEE_VERSION }} --fail-with-body -o $GITHUB_STEP_SUMMARY
       - name: debug upgrade failure
         if: success() || failure()
         run: |
