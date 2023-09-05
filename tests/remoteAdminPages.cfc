@@ -56,9 +56,9 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
                         submit: "submit"
                     }
                 );
-                //systemOutput( loginResult, true );
+                systemOutput( loginResult, true );
                 expect( loginResult.status ).toBe( 200, "Status code" );
-                //systemOutput(loginResult.cookies, true);
+                systemOutput(loginResult.cookies, true);
                 variables.cookies = {};
                 loop query=loginResult.cookies {
                     variables.cookies[ loginResult.cookies.name ] = loginResult.cookies.value;
