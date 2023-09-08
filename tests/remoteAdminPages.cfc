@@ -47,7 +47,7 @@ component extends="org.lucee.cfml.test.LuceeTestCase"	{
             it( title="Login to admin", body=function(){
                 systemOutput("------------- login to admin", true);
                 local.loginResult = remoteRequest(
-                    template: adminRoot & adminPage & "?rawError=true&action=overview",
+                    template: adminRoot & adminPage & "?rawError=true",
                     method: "post",
                     forms: {
                         login_passwordserver: variables.SERVERADMINPASSWORD,
